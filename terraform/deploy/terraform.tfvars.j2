@@ -3,8 +3,10 @@ parent_domain_name    = "{{dataworks_domain_name}}"
 whitelist_cidr_blocks    = [{% set doiranges = doi["cidr_blocks"].split(',') %}
   {% for cidr in doiranges %}"{{ cidr }}",
   {% endfor %}{% set sreranges = sre["cidr_blocks"].split(',') %}{% for cidr in sreranges %}"{{ cidr }}",
-  {% endfor %}{% set gitlabranges = gitlab["cidr_blocks"].split(',') %}{% for cidr in gitlabranges %}"{{ cidr }}",
-  {% endfor %}"{{ucfs["team_cidr_block"]}}"
+  {% endfor %}{% set gitlab_web_ui_cloudflare = gitlab_web_ui_cloudflare["cidr_blocks"].split(',') %}{% for cidr in gitlab_web_ui_cloudflare %}"{{ cidr }}",
+  {% endfor %}"{{ucfs["team_cidr_block"]}}",
+  "{{gitlab_dedicated_non_prod["cidr_block"]}}",
+  "{{gitlab_dedicated_prod["cidr_block"]}}"
 ]
 
 concourse_ami = "{{concourse_ami}}"
